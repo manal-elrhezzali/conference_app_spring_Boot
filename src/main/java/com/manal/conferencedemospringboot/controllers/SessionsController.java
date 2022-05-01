@@ -34,8 +34,8 @@ public class SessionsController {
     return sessionRepository.findAll();
   }
 
-  @GetMapping
-  @RequestMapping("{id}")
+  @GetMapping("{id}")
+//  @RequestMapping("{id}")
   public Session get(@PathVariable Long id) {
     return sessionRepository.getById(id);
   }
@@ -49,8 +49,8 @@ public class SessionsController {
     return sessionRepository.saveAndFlush(session);
   }
 
-//  @DeleteMapping
-  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+  @DeleteMapping("{id}")
+//  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
   public void delete(@PathVariable Long id) {
     //also need to check cascades.
     //this only deletes session records without any children records
@@ -58,8 +58,8 @@ public class SessionsController {
     sessionRepository.deleteById(id);
   }
 
-//  @PutMapping
-  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+  @PutMapping("{id}")
+//  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
   public Session update(@PathVariable Long id, @RequestBody Session session) {
     //because this is a PUT, we expect all attributes to be passed in.
     //a Patch would only update passed values
@@ -71,7 +71,6 @@ public class SessionsController {
     //object that we do not want to copy
     BeanUtils.copyProperties(session, existingSession, "session_id");
     return sessionRepository.saveAndFlush(existingSession);
-
   }
 
 
