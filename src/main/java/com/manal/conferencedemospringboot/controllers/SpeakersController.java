@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,16 +41,16 @@ public class SpeakersController {
     return speakerRepository.saveAndFlush(speaker);
   }
 
-  @PutMapping
-  @RequestMapping("{id}")
+//  @PutMapping
+  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
   public Speaker update(@PathVariable Long id, @RequestBody Speaker speaker) {
     Speaker existingSpeaker = speakerRepository.getById(id);
     BeanUtils.copyProperties(speaker, existingSpeaker, "speaker_id");
     return speakerRepository.saveAndFlush(existingSpeaker);
   }
 
-  @DeleteMapping
-  @RequestMapping("{id}")
+//  @DeleteMapping
+  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
   public void delete(@PathVariable Long id) {
     speakerRepository.deleteById(id);
   }

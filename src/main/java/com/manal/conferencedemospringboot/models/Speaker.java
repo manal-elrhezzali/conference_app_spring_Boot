@@ -29,7 +29,7 @@ public class Speaker {
   //under the covers. Without it, we'll end up with
   // an exception when JPA queries the data and tries
   // to push it into the Session instance
-  @Type(type = "org.hibernate.type.binaryType")
+  @Type(type = "org.hibernate.type.BinaryType")
   private byte[] speaker_photo;
 
   public byte[] getSpeaker_photo() {

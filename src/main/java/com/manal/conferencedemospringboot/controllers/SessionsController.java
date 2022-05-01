@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,8 +49,8 @@ public class SessionsController {
     return sessionRepository.saveAndFlush(session);
   }
 
-  @DeleteMapping
-  @RequestMapping(value = "{id}")
+//  @DeleteMapping
+  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
   public void delete(@PathVariable Long id) {
     //also need to check cascades.
     //this only deletes session records without any children records
@@ -57,8 +58,8 @@ public class SessionsController {
     sessionRepository.deleteById(id);
   }
 
-  @PutMapping
-  @RequestMapping(value = "{id}")
+//  @PutMapping
+  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
   public Session update(@PathVariable Long id, @RequestBody Session session) {
     //because this is a PUT, we expect all attributes to be passed in.
     //a Patch would only update passed values
