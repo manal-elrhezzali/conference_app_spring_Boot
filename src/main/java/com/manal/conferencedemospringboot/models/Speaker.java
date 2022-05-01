@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import org.hibernate.annotations.Type;
 
 @Entity(name= "speakers")
 public class Speaker {
@@ -18,7 +20,27 @@ public class Speaker {
   private String title;
   private String company;
   private String speaker_bio;
-//specified that it is the other side of the specified
+  //gets JPA to stream the binary data into this field
+  //stands for large object, binary data can get really large
+  // and this annotation helps JPA deal with large data
+  @Lob
+  //needed to help hibernate deal with binary data
+  //Hibernate is the JPA implementation we're using
+  //under the covers. Without it, we'll end up with
+  // an exception when JPA queries the data and tries
+  // to push it into the Session instance
+  @Type(type = "org.hibernate.type.binaryType")
+  private byte[] speaker_photo;
+
+  public byte[] getSpeaker_photo() {
+    return speaker_photo;
+  }
+
+  public void setSpeaker_photo(byte[] speaker_photo) {
+    this.speaker_photo = speaker_photo;
+  }
+
+  //specified that it is the other side of the specified
 // many-to-many relationship
 //mapped by speakers refers to the attribute
 // on the Session class called speakers
