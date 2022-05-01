@@ -1,9 +1,11 @@
 package com.manal.conferencedemospringboot.models;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity(name= "speakers")
 public class Speaker {
@@ -16,6 +18,20 @@ public class Speaker {
   private String title;
   private String company;
   private String speaker_bio;
+//specified that it is the other side of the specified
+// many-to-many relationship
+//mapped by speakers refers to the attribute
+// on the Session class called speakers
+  @ManyToMany(mappedBy = "speakers")
+  private List<Session> sessions;
+
+  public List<Session> getSessions() {
+    return sessions;
+  }
+
+  public void setSessions(List<Session> sessions) {
+    this.sessions = sessions;
+  }
 
   public Speaker() {
   }

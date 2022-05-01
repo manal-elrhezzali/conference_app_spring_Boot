@@ -1,9 +1,13 @@
 package com.manal.conferencedemospringboot.models;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity(name= "sessions")
 public class Session {
@@ -17,6 +21,23 @@ public class Session {
   private String session_name;
   private String session_description;
   private Integer session_length;
+
+  //means that we are setting a many-to-many relationship
+  //and that we have a mapping JoinTable in our DB
+  @ManyToMany
+  //defines the JoinTable and the foreign key columns
+  @JoinTable(name = "session_speakers",
+  joinColumns = @JoinColumn(name = "session_id"),
+  inverseJoinColumns = @JoinColumn(name = "speaker_id"))
+  private List<Speaker> speakers;
+
+  public List<Speaker> getSpeakers() {
+    return speakers;
+  }
+
+  public void setSpeakers(List<Speaker> speakers) {
+    this.speakers = speakers;
+  }
 
   //helps with serialization and deserialization
 //  which will happen when we plug in the controllers later on
