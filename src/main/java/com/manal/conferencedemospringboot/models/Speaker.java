@@ -1,5 +1,7 @@
 package com.manal.conferencedemospringboot.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,9 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.Type;
 
 @Entity(name= "speakers")
+//We do not want to serialize these properties because these will try to load in all
+// of our relational data with SQL, and it can cause problems
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Speaker {
 
   @Id
@@ -45,6 +50,8 @@ public class Speaker {
 //mapped by speakers refers to the attribute
 // on the Session class called speakers
   @ManyToMany(mappedBy = "speakers")
+  //an annotation that will prevent it from back serialization back to the sessions
+  @JsonIgnore
   private List<Session> sessions;
 
   public List<Session> getSessions() {
