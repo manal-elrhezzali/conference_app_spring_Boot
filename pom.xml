@@ -11,9 +11,9 @@
 	<groupId>com.manal</groupId>
 	<artifactId>conference-demo-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>conference-demo-spring-boot</name>
 	<description>Demo project for Spring Boot</description>
+<!--	<packaging>war</packaging>-->
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -26,11 +26,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- Exclude te Tomcat dependency-->
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>org.springframework.boot</groupId>-->
+<!--					<artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
+		<!-- Adding Jetty's dependency-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-jetty</artifactId>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+<!--			<scope>provided</scope>-->
 		</dependency>
 
 <!--postgres driver dependency-->
@@ -53,6 +66,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+<!--				<configuration>-->
+<!--&lt;!&ndash;					<executable>true</executable>&ndash;&gt;-->
+<!--				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>
